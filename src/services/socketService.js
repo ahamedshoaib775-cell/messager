@@ -2,7 +2,10 @@
 
 import { io } from 'socket.io-client';
 
-const SOCKET_SERVER_URL = 'http://localhost:8080';
+const SOCKET_SERVER_URL =
+  import.meta.env.VITE_SOCKET_URL ||
+  import.meta.env.NEXT_PUBLIC_SOCKET_URL ||
+  (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:8080');
 
 class SocketService {
   constructor() {
