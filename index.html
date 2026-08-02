@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#0b0f19" />
     <meta name="description" content="NovaLink - Next-Gen E2EE Messaging Platform with Seamless Offline Mesh Fallback" />
     <title>NovaLink | Next-Gen E2EE & Offline Mesh Messaging Platform</title>
     <!-- Tailwind CDN for quick utility classes fallback -->
@@ -11,7 +15,7 @@
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   </head>
-  <body class="bg-slate-950 text-gray-100 antialiased overflow-hidden">
+  <body class="bg-slate-950 text-gray-100 antialiased overflow-hidden select-none touch-manipulation">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

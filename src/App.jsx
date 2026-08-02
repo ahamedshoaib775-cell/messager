@@ -31,8 +31,8 @@ const MainLayout = () => {
       <Header />
 
       {/* Main Content Workspace */}
-      <div className="flex flex-1 overflow-hidden relative">
-        {/* Left Vertical Icon Bar */}
+      <div className="flex flex-1 overflow-hidden relative pb-16 md:pb-0">
+        {/* Left Vertical Icon Bar (desktop) or Floating Bottom Navigation (mobile) */}
         <SidebarNav />
 
         {/* Dynamic Tab Views */}
@@ -40,7 +40,9 @@ const MainLayout = () => {
           <div className="flex flex-1 overflow-hidden">
             <ChatSidebar />
             <div className="flex-1 flex flex-col overflow-hidden">
-              <StoriesBar />
+              <div className="hidden md:block">
+                <StoriesBar />
+              </div>
               <ChatWindow />
             </div>
           </div>

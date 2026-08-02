@@ -28,7 +28,9 @@ export const ChatSidebar = () => {
   });
 
   return (
-    <aside className="w-80 md:w-96 glass-panel border-r border-white/10 flex flex-col h-full z-10">
+    <aside className={`w-full md:w-96 glass-panel border-r border-white/10 flex flex-col h-full z-10 ${
+      activeChatId ? 'hidden md:flex' : 'flex'
+    }`}>
       {/* Header & Search */}
       <div className="p-4 border-b border-white/10 flex flex-col gap-3">
         <div className="flex items-center justify-between">

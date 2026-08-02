@@ -67,6 +67,7 @@
   box-sizing: border-box;
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body, html, #root {
@@ -76,6 +77,16 @@ body, html, #root {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   user-select: none;
+  touch-action: manipulation;
+}
+
+/* Mobile Safe Area Insets */
+.safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom, 16px);
+}
+
+.safe-area-pt {
+  padding-top: env(safe-area-inset-top, 0px);
 }
 
 /* Glassmorphism Utilities */

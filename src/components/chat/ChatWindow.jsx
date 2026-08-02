@@ -27,11 +27,13 @@ import {
   MessageSquare,
   UserPlus,
   Zap,
+  ChevronLeft,
 } from 'lucide-react';
 
 export const ChatWindow = () => {
   const {
     activeChatId,
+    setActiveChatId,
     chats,
     messages,
     sendMessage,
@@ -58,7 +60,7 @@ export const ChatWindow = () => {
   // Clean empty state if no chat selected or contact list empty
   if (!chat || !activeChatId) {
     return (
-      <main className="flex-1 flex flex-col h-full glass-panel relative overflow-hidden items-center justify-center p-8 text-center">
+      <main className="hidden md:flex flex-1 flex-col h-full glass-panel relative overflow-hidden items-center justify-center p-8 text-center">
         <div className="max-w-md flex flex-col items-center gap-4">
           <div className="w-20 h-20 rounded-3xl bg-gradient-to-tr from-indigo-600 to-cyan-400 p-[2px] shadow-2xl shadow-indigo-500/30 animate-float">
             <div className="w-full h-full bg-slate-950 rounded-[22px] flex items-center justify-center">
@@ -149,10 +151,19 @@ export const ChatWindow = () => {
   };
 
   return (
-    <main className="flex-1 flex flex-col h-full glass-panel relative overflow-hidden">
+    <main className="flex-1 flex flex-col h-full w-full glass-panel relative overflow-hidden">
       {/* Top Header */}
-      <div className="h-16 px-6 border-b border-white/10 flex items-center justify-between z-10 glass-panel">
-        <div className="flex items-center gap-3">
+      <div className="h-16 px-4 md:px-6 border-b border-white/10 flex items-center justify-between z-10 glass-panel">
+        <div className="flex items-center gap-2.5">
+          {/* Mobile Back to List Button */}
+          <button
+            onClick={() => setActiveChatId(null)}
+            className="md:hidden p-1.5 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-colors"
+            title="Back to Messages"
+          >
+            <ChevronLeft className="w-6 h-6 text-cyan-400" />
+          </button>
+
           <div className="relative">
             <img
               src={chat.avatar}
@@ -164,16 +175,16 @@ export const ChatWindow = () => {
             )}
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h3 className="font-bold text-sm text-gray-100">{chat.name}</h3>
+            <div className="flex items-center gap-1.5">
+              <h3 className="font-bold text-sm text-gray-100 truncate max-w-[120px] sm:max-w-none">{chat.name}</h3>
               {chat.e2eeVerified && (
                 <button onClick={() => setE2eeModalOpen(true)}>
-                  <ShieldCheck className="w-4 h-4 text-indigo-400" title="E2EE Fingerprint Key Verified" />
+                  <ShieldCheck className="w-4 h-4 text-indigo-400 flex-shrink-0" title="E2EE Fingerprint Key Verified" />
                 </button>
               )}
             </div>
-            <p className="text-[11px] text-gray-400">
-              {isOfflineMesh ? '📶 Connected via NovaMesh Hop' : chat.lastSeen}
+            <p className="text-[11px] text-gray-400 truncate max-w-[120px] sm:max-w-none">
+              {isOfflineMesh ? '📶 NovaMesh Hop' : chat.lastSeen}
             </p>
           </div>
         </div>
