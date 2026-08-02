@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  novalink-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8080/api
+      - VITE_SOCKET_URL=http://localhost:8080
+    depends_on:
+      - novalink-backend
+
+  novalink-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=novalink_admin
+      - DB_PASSWORD=supersecretpassword
+      - DB_NAME=novalink
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - JWT_SECRET=novalink_super_secret_jwt_key_2026
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: novalink-db
+    environment:
+      POSTGRES_DB: novalink
+      POSTGRES_USER: novalink_admin
+      POSTGRES_PASSWORD: supersecretpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./backend/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+  redis:
+    image: redis:7-alpine
+    container_name: novalink-redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  pgdata:
